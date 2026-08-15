@@ -25,7 +25,7 @@ website-docs/
 
 ---
 
-## ✅ Two things to finish setup
+## ✅ One thing left to finish setup
 
 ### 1. Wire up the forms (Formspree — free)
 The Register and Contact forms are ready for [Formspree](https://formspree.io). Until configured, a form submit falls back to opening the visitor's email app.
@@ -38,12 +38,9 @@ The Register and Contact forms are ready for [Formspree](https://formspree.io). 
    ```
    and replace `YOUR_FORM_ID` with your real ID. (You can use one form for both, or create two.)
 
-### 2. Add your email (optional)
-When you have a club email, update the placeholder `info@coastalexotics.com`:
-- `data-mailto="info@coastalexotics.com"` in `register.html` and `contact.html`
-- Add it to the footer / contact info if you'd like it shown publicly.
+Public contact details on the site: **Instagram @coastalexotics_**, **(831) 737-7283**, and **Coastalexotics06@gmail.com**.
 
-Current public contact: **Instagram @coastalexotics_** and **(831) 737-7283**.
+To change the email later, update it in the footer of all five pages, the contact cards in `register.html` / `contact.html`, and the `data-mailto="…"` attribute on both forms.
 
 ---
 
