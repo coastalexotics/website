@@ -101,6 +101,9 @@
       try {
         const res = await fetch(endpoint, {
           method: 'POST',
+          // FormSubmit activates each referring URL separately; sending only the
+          // origin lets one activation cover every form on the site.
+          referrerPolicy: 'origin',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify(Object.fromEntries(new FormData(form)))
         });
