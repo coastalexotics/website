@@ -70,47 +70,50 @@
     });
   }
 
-  /* ---- forms (Formspree-ready with graceful fallback) ---- */
+  /* ---- forms (emailed via FormSubmit, mailto fallback) ---- */
   document.querySelectorAll('form[data-form]').forEach((form) => {
     const status = form.querySelector('.form-status');
+    const to = form.getAttribute('data-mailto') || 'coastalexotics06@gmail.com';
     const setStatus = (msg, type) => {
       if (!status) return;
       status.textContent = msg;
       status.className = 'form-status show ' + type;
     };
     form.addEventListener('submit', async (e) => {
+      e.preventDefault();
       const action = form.getAttribute('action') || '';
-      // If no real endpoint is configured yet, fall back to a mailto draft.
-      if (!action || action.includes('YOUR_FORM_ID')) {
-        e.preventDefault();
-        const data = new FormData(form);
-        const to = form.getAttribute('data-mailto') || 'info@coastalexotics.com';
+      // No endpoint configured: fall back to a pre-filled email draft.
+      if (!action) {
         const subject = encodeURIComponent('Coastal Exotics — ' + (form.getAttribute('data-subject') || 'Website inquiry'));
         let body = '';
-        data.forEach((v, k) => { if (v) body += k.replace(/_/g, ' ') + ': ' + v + '\n'; });
+        new FormData(form).forEach((v, k) => { if (v && k[0] !== '_') body += k.replace(/_/g, ' ') + ': ' + v + '\n'; });
         window.location.href = `mailto:${to}?subject=${subject}&body=${encodeURIComponent(body)}`;
         setStatus('Opening your email app to send the message…', 'ok');
         return;
       }
-      // Real endpoint: submit via fetch for a smooth, no-reload experience.
-      e.preventDefault();
+      // FormSubmit's JSON endpoint lives under /ajax/; the plain URL stays as the no-JS fallback.
+      const endpoint = action.includes('formsubmit.co/') && !action.includes('/ajax/')
+        ? action.replace('formsubmit.co/', 'formsubmit.co/ajax/')
+        : action;
       const btn = form.querySelector('button[type="submit"]');
       const orig = btn ? btn.textContent : '';
       if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
       try {
-        const res = await fetch(action, {
+        const res = await fetch(endpoint, {
           method: 'POST',
-          body: new FormData(form),
-          headers: { Accept: 'application/json' }
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify(Object.fromEntries(new FormData(form)))
         });
-        if (res.ok) {
+        const data = await res.json().catch(() => ({}));
+        // FormSubmit answers 200 with success:"false" when it didn't send (e.g. before activation).
+        if (res.ok && String(data.success) !== 'false') {
           form.reset();
           setStatus('Thank you — your message is on its way. We’ll be in touch shortly.', 'ok');
         } else {
-          setStatus('Something went wrong. Please email us directly and we’ll respond right away.', 'err');
+          setStatus(`Something went wrong. Please email us directly at ${to}.`, 'err');
         }
       } catch (err) {
-        setStatus('Network error. Please try again or email us directly.', 'err');
+        setStatus(`Network error. Please try again or email us at ${to}.`, 'err');
       } finally {
         if (btn) { btn.disabled = false; btn.textContent = orig; }
       }

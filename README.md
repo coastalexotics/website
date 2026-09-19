@@ -25,22 +25,15 @@ website-docs/
 
 ---
 
-## ✅ One thing left to finish setup
+## 📬 Forms → coastalexotics06@gmail.com
 
-### 1. Wire up the forms (Formspree — free)
-The Register and Contact forms are ready for [Formspree](https://formspree.io). Until configured, a form submit falls back to opening the visitor's email app.
+The Register and Contact forms email every submission to **coastalexotics06@gmail.com** using [FormSubmit](https://formsubmit.co) (free, no account needed).
 
-1. Create a free account at <https://formspree.io> and add a new form.
-2. Copy your form endpoint (looks like `https://formspree.io/f/abcwxyz`).
-3. In **`register.html`** and **`contact.html`**, find:
-   ```html
-   action="https://formspree.io/f/YOUR_FORM_ID"
-   ```
-   and replace `YOUR_FORM_ID` with your real ID. (You can use one form for both, or create two.)
+**One-time activation:** the very first submission triggers an email from FormSubmit to coastalexotics06@gmail.com with an **"Activate Form"** button. Click it once — after that, every submission lands in the inbox. (Check Spam/Promotions if it doesn't show up.) Until activated, visitors are asked to email directly instead.
 
-Public contact details on the site: **Instagram @coastalexotics_**, **(831) 737-7283**, and **Coastalexotics06@gmail.com**.
+Public contact details on the site: **Instagram @coastalexotics_**, **(831) 737-7283**, and **coastalexotics06@gmail.com**.
 
-To change the email later, update it in the footer of all five pages, the contact cards in `register.html` / `contact.html`, and the `data-mailto="…"` attribute on both forms.
+To change the email later, update it in the footer of all five pages, the contact cards in `register.html` / `contact.html`, and the `action` + `data-mailto` attributes on both forms (a new address needs activating again).
 
 ---
 
