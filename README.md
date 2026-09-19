@@ -6,15 +6,17 @@ Built as a static site (plain HTML, CSS, and vanilla JavaScript) — no build st
 
 ## Pages
 - `index.html` — Home (hero, about, membership benefits, gallery strip, call-to-action)
-- `events.html` — Events ("news coming soon" + Instagram @coastalexotics_)
-- `register.html` — Membership inquiry form
-- `gallery.html` — Photo gallery with full-screen lightbox
-- `contact.html` — Contact form + club details
+- `events/index.html` — Events ("news coming soon" + Instagram @coastalexotics_)
+- `register/index.html` — Membership inquiry form
+- `gallery/index.html` — Photo gallery with full-screen lightbox
+- `contact/index.html` — Contact form + club details
 
 ## Structure
 ```
 website-docs/
-├── index.html  events.html  register.html  gallery.html  contact.html
+├── index.html              # home  → coastalexotics.co/
+├── events/ register/ gallery/ contact/   # each has index.html → /events/ etc.
+├── events.html … contact.html   # tiny redirects from the old .html URLs
 ├── css/styles.css          # all styling + responsive design
 ├── js/main.js              # nav, scroll effects, lightbox, forms
 ├── assets/images/          # web-optimized photos, logos, favicons
@@ -33,13 +35,13 @@ The Register and Contact forms email every submission to **coastalexotics06@gmai
 
 Public contact details on the site: **Instagram @coastalexotics_**, **(831) 737-7283**, and **coastalexotics06@gmail.com**.
 
-To change the email later, update it in the footer of all five pages, the contact cards in `register.html` / `contact.html`, and the `action` + `data-mailto` attributes on both forms (a new address needs activating again).
+To change the email later, update it in the footer of all five pages, the contact cards in `register/index.html` / `contact/index.html`, and the `action` + `data-mailto` attributes on both forms (a new address needs activating again).
 
 ---
 
 ## Adding more gallery photos
 1. Drop new images into `assets/images/` (JPEGs, ideally ~2000px wide).
-2. In `gallery.html`, copy one `<figure class="gallery-item …">` block and update the
+2. In `gallery/index.html`, copy one `<figure class="gallery-item …">` block and update the
    `data-full`, `src`, `alt`, and caption. Use grid classes `g-wide`, `g-tall`, `g-half`, or `g-sq` to size each tile.
 
 > Tip to optimize a new photo on macOS:

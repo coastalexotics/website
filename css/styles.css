@@ -252,12 +252,12 @@ h1,h2,h3,h4 { font-family: var(--font-head); font-weight: 600; line-height: 1.08
 
 /* ---------- contact / info cards ---------- */
 .info-list { display: grid; gap: 16px; }
-.info-item { display:flex; gap:16px; align-items:flex-start; padding: 22px; background: var(--surface); border:1px solid var(--line-soft); border-radius: var(--radius); transition: border-color .3s; }
+.info-item { display:flex; gap:18px; align-items:center; padding: 22px; background: var(--surface); border:1px solid var(--line-soft); border-radius: var(--radius); transition: border-color .3s; }
 .info-item:hover { border-color: var(--line); }
 .info-item .ico { flex:none; width:46px; height:46px; border-radius:12px; background: var(--accent-soft); display:grid; place-items:center; }
 .info-item .ico svg { width:22px; height:22px; color: var(--accent); }
-.info-item .k { font-size:.76rem; letter-spacing:.16em; text-transform:uppercase; color: var(--muted); }
-.info-item .v { font-size:1.05rem; margin-top:3px; font-weight:500; }
+.info-item .k { display:block; font-size:.76rem; letter-spacing:.16em; text-transform:uppercase; color: var(--muted); }
+.info-item .v { display:block; font-size:1.05rem; margin-top:6px; font-weight:500; }
 .info-item .v a:hover { color: var(--accent); }
 
 /* ---------- events placeholder ---------- */
